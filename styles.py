@@ -6,7 +6,6 @@ def apply_styles(frame):
         'foreground': '#000',
         'font': ('Arial', 10)
     }
-
     for widget in frame.winfo_children():
         if isinstance(widget, (Frame, Button, Entry, Canvas, ttk.Progressbar)):
             widget.configure(bg=style['background'], fg=style['foreground'], font=style['font'])
