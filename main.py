@@ -52,8 +52,11 @@ class PDFToolApp:
         self.combine_button.grid(row=5, column=0, columnspan=4, padx=10, pady=10)
         self.combine_button.config(state='disabled')  # Inicialmente desabilitado
 
+        self.clear_button = Button(self.frame, text="Limpar Seleção", command=self.clear_selection, font=("Arial", 14), width=20, height=2)
+        self.clear_button.grid(row=6, column=0, columnspan=4, padx=10, pady=10)
+        
         self.progress = ttk.Progressbar(self.frame, orient="horizontal", length=400, mode="determinate")
-        self.progress.grid(row=6, column=0, columnspan=4, pady=10)
+        self.progress.grid(row=7, column=0, columnspan=4, pady=10)
         styles.apply_styles(self.scrollable_frame)
 
     def browse_files(self):
@@ -85,6 +88,14 @@ class PDFToolApp:
             webbrowser.open_new(file_path)
         else:
             messagebox.showerror("Erro", "Arquivo não encontrado.")
+
+    def clear_selection(self):
+        for widget in self.scrollable_frame.winfo_children():
+            widget.destroy()
+        self.pdf_entries.clear()
+        self.organize_button.config(state='disabled')
+        self.extract_button.config(state='disabled')
+        self.combine_button.config(state='disabled')
 
     def merge_pdfs(self):
         pdf_files = self.pdf_entries
